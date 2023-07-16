@@ -6,7 +6,6 @@ class StringsManager {
   static const String skip = 'Skip';
   static const String or = 'OR';
 
-
   // Exit Dialog
   static const String exitDialogMessage = 'Are you sure you want to exit ?';
 
@@ -32,7 +31,13 @@ class StringsManager {
 
   // Sign in
   static const String signInTitle = 'SIGN IN NOW';
-  static const String signInMessage = 'Sign in to your account and enjoy our services...';
+  static const String signInMessage =
+      'Sign in to your account and enjoy our services...';
+  static const String emailAddress = 'Email Address';
+  static const String emailAddressHint = 'example@company.com';
+  static const String password = 'Password';
+  static const String passwordHint = '********';
+  static const String forgotPassword = 'Don\'t remember your password ?';
 
   /// *** ERRORS *** ///
   // Navigation Error

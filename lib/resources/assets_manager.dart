@@ -6,7 +6,7 @@ class AssetsManager {
   }) {
     String extension = svg ? 'svg' : 'png';
 
-    return 'assets/images/$imageName.$extension';
+    return 'assets/images/$extension/$imageName.$extension';
   }
 
   // Icons

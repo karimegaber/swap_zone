@@ -7,20 +7,20 @@ import 'package:swap_zone/resources/values_manager.dart';
 import 'package:swap_zone/view_models/splash_view_model/splash_view_model.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({Key? key}) : super(key: key);
+  final SplashViewModel viewModel;
+
+  const SplashView({super.key, required this.viewModel});
 
   @override
   State<SplashView> createState() => _SplashViewState();
 }
 
 class _SplashViewState extends State<SplashView> {
-  final SplashViewModel _viewModel = SplashViewModel();
-
   @override
   void initState() {
     super.initState();
 
-    _viewModel.start(
+    widget.viewModel.start(
       context: context,
     );
   }

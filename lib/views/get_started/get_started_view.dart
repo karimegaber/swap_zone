@@ -12,11 +12,13 @@ import 'package:swap_zone/resources/values_manager.dart';
 import 'package:swap_zone/view_models/get_started_view_model/get_started_view_model.dart';
 
 class GetStartedView extends StatelessWidget {
-  const GetStartedView({Key? key}) : super(key: key);
+  final GetStartedViewModel viewModel;
+
+  const GetStartedView({super.key, required this.viewModel});
+
 
   @override
   Widget build(BuildContext context) {
-    final GetStartedViewModel viewModel = GetStartedViewModel();
 
     return CanExit(
       child: Scaffold(

@@ -7,12 +7,12 @@ import 'package:swap_zone/view_models/on_boarding_view_model/on_boarding_view_mo
 import 'package:swap_zone/views/on_boarding/on_boarding_widgets/on_boarding_control.dart';
 
 class OnBoardingView extends StatelessWidget {
-  const OnBoardingView({super.key});
+  final OnBoardingViewModel viewModel;
+
+  const OnBoardingView({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    final OnBoardingViewModel viewModel = OnBoardingViewModel();
-
     return CanExit(
       child: Scaffold(
         body: SafeArea(

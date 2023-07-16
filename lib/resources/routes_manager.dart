@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:swap_zone/resources/strings_manager.dart';
+import 'package:swap_zone/view_models/get_started_view_model/get_started_view_model.dart';
+import 'package:swap_zone/view_models/on_boarding_view_model/on_boarding_view_model.dart';
+import 'package:swap_zone/view_models/sign_in_view_model/sign_in_view_model.dart';
+import 'package:swap_zone/view_models/splash_view_model/splash_view_model.dart';
 import 'package:swap_zone/views/get_started/get_started_view.dart';
 import 'package:swap_zone/views/on_boarding/on_boarding_view.dart';
 import 'package:swap_zone/views/sign_in/sign_in_view.dart';
@@ -17,19 +21,27 @@ class RoutesGenerator {
     switch (settings.name) {
       case Routes.splashScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => const SplashView(),
+          builder: (_) => SplashView(
+            viewModel: SplashViewModel(),
+          ),
         );
       case Routes.onBoardingScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => const OnBoardingView(),
+          builder: (_) => OnBoardingView(
+            viewModel: OnBoardingViewModel(),
+          ),
         );
       case Routes.getStartedScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => const GetStartedView(),
+          builder: (_) => GetStartedView(
+            viewModel: GetStartedViewModel(),
+          ),
         );
       case Routes.signInScreenRoute:
         return MaterialPageRoute(
-          builder: (_) => const SignInView(),
+          builder: (_) => SignInView(
+            viewModel: SignInViewModel(),
+          ),
         );
 
       default:

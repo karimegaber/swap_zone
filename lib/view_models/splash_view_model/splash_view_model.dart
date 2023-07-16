@@ -9,7 +9,6 @@ class SplashViewModel {
     required BuildContext context,
   }) {
     CacheHelper.getData(key: ConstantsManager.onBoardingSkipped).then((value) {
-      print(value ?? 'No value');
       if (value ?? false) {
         // User Skipped on boarding screen
         WidgetsBinding.instance.addPostFrameCallback((_) {

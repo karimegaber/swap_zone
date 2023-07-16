@@ -16,7 +16,7 @@ class FontWeightManager {
 // Manages font sizes all around the application.
 class FontSize {
   static const double fs12 = 12.0;
-  static const double fs14 = 12.0;
+  static const double fs14 = 14.0;
   static const double fs16 = 16.0;
   static const double fs18 = 18.0;
   static const double fs20 = 20.0;

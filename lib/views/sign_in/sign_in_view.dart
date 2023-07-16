@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swap_zone/components/widgets/auth_text_field.dart';
 import 'package:swap_zone/components/widgets/button.dart';
 import 'package:swap_zone/components/widgets/or_divider.dart';
+import 'package:swap_zone/components/widgets/social_media_auth_item.dart';
+import 'package:swap_zone/components/widgets/text_widget.dart';
 import 'package:swap_zone/resources/assets_manager.dart';
 import 'package:swap_zone/resources/colors_manager.dart';
+import 'package:swap_zone/resources/fonts_manager.dart';
 import 'package:swap_zone/resources/strings_manager.dart';
+import 'package:swap_zone/resources/styles_manager.dart';
 import 'package:swap_zone/resources/values_manager.dart';
+import 'package:swap_zone/view_models/sign_in_view_model/sign_in_view_model.dart';
 import 'package:swap_zone/views/sign_in/sign_in_widgets/heading_widget.dart';
 
 class SignInView extends StatelessWidget {
-  const SignInView({Key? key}) : super(key: key);
+  final SignInViewModel viewModel;
+
+  const SignInView({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -31,51 +39,128 @@ class SignInView extends StatelessWidget {
               // Email and Password
               Container(
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.70,
+                height: MediaQuery.of(context).size.height * 0.8,
                 padding: EdgeInsets.all(AppPadding.p20.r),
                 decoration: BoxDecoration(
                   color: ColorsManager.orange.withOpacity(0.7),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(AppSize.s40.r),
-                    topRight: Radius.circular(AppSize.s40.r),
+                    topLeft: Radius.circular(AppSize.s30.r),
+                    topRight: Radius.circular(AppSize.s30.r),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(height: AppSize.s50.h),
-                    AuthTextField(
-                      controller: TextEditingController(),
-                      text: 'Email address',
-                      prefixIcon: AssetsManager.imageGetter(
-                        imageName: 'on_boarding_screen_1',
-                        svg: true,
+                child: Form(
+                  key: viewModel.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: AppSize.s20.h),
+
+                      // Email Address
+                      TextWidget(
+                        text: StringsManager.emailAddress,
+                        style: getBoldStyle(
+                          color: ColorsManager.black,
+                          fontSize: FontSize.fs14.sp,
+                        ),
                       ),
-                      validator: (x) {},
-                      inputType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(height: AppSize.s12.h),
-                    AuthTextField(
-                      controller: TextEditingController(),
-                      text: 'Password',
-                      prefixIcon: AssetsManager.imageGetter(
-                        imageName: 'on_boarding_screen_1',
-                        svg: true,
+                      SizedBox(height: AppSize.s4.h),
+                      AuthTextField(
+                        controller: viewModel.emailAddressController,
+                        text: StringsManager.emailAddressHint,
+                        inputType: TextInputType.emailAddress,
+                        validator: viewModel.emailAddressValidation,
+                        prefixIcon: AssetsManager.iconGetter(
+                          iconName: 'email_address',
+                        ),
                       ),
-                      validator: (x) {},
-                      inputType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(height: AppSize.s20.h),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.75,
-                      height: AppSize.s40.h,
-                      child: Button(
-                        text: StringsManager.signIn,
-                        onPressed: () {},
+
+                      SizedBox(height: AppSize.s12.h),
+
+                      // Password
+                      TextWidget(
+                        text: StringsManager.password,
+                        style: getBoldStyle(
+                          color: ColorsManager.black,
+                          fontSize: FontSize.fs14.sp,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: AppSize.s20.h),
-                    const OrDivider(),
-                  ],
+                      SizedBox(height: AppSize.s4.h),
+                      StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return AuthTextField(
+                            isPassword: true,
+                            obscure: viewModel.passwordVisibility,
+                            controller: viewModel.passwordController,
+                            text: StringsManager.passwordHint,
+                            inputType: TextInputType.visiblePassword,
+                            validator: viewModel.passwordLengthValidation,
+                            prefixIcon:
+                                AssetsManager.iconGetter(iconName: 'password'),
+                            suffixIcon: AssetsManager.iconGetter(
+                              iconName: viewModel.passwordVisibility
+                                  ? 'visibility_on'
+                                  : 'visibility_off',
+                            ),
+                            onPressSuffix: () {
+                              setState(() {
+                                viewModel.changePasswordVisibilityState();
+                              });
+                            },
+                          );
+                        },
+                      ),
+
+                      // Forgot Password
+                      Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: TextButton(
+                          child: TextWidget(
+                            text: StringsManager.forgotPassword,
+                            style: getRegularStyle(
+                              color: ColorsManager.black,
+                              fontSize: FontSize.fs14.sp,
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+
+                      SizedBox(height: AppSize.s10.h),
+
+                      // Sign in Button
+                      Center(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          height: AppSize.s40.h,
+                          child: Button(
+                            text: StringsManager.signIn,
+                            onPressed: () {
+                              viewModel.onPressSignIn();
+                            },
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: AppSize.s20.h),
+
+                      const OrDivider(),
+
+                      SizedBox(height: AppSize.s20.h),
+
+                      // Social Media Sign in
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SocialMediaAuthItem(iconName: 'google', onPressed: (){},),
+
+                          SizedBox(width: AppSize.s20.w),
+
+                          SocialMediaAuthItem(iconName: 'facebook', onPressed: (){},),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

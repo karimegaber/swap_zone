@@ -66,7 +66,7 @@ class OnBoardingViewModel {
   }
 
   // Navigate user to auth options.
-  getStarted({required BuildContext context}) {
+  void getStarted({required BuildContext context}) {
     CacheHelper.insertData(key: ConstantsManager.onBoardingSkipped, value: true)
         .then((value) {
       Navigator.of(context).pushReplacementNamed(Routes.getStartedScreenRoute);
