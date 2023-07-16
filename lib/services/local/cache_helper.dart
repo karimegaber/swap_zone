@@ -23,7 +23,7 @@ class CacheHelper {
   static Future<dynamic> getData({
     required String key,
   }) async {
-    return await sharedPreferences.get(key);
+    return sharedPreferences.get(key);
   }
 
   static Future<bool> removeData({

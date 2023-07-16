@@ -4,6 +4,8 @@ class StringsManager {
   static const String cancel = 'Cancel';
   static const String next = 'Next';
   static const String skip = 'Skip';
+  static const String or = 'OR';
+
 
   // Exit Dialog
   static const String exitDialogMessage = 'Are you sure you want to exit ?';
@@ -22,6 +24,15 @@ class StringsManager {
   static const String onBoardingTitle3 = 'Safe Exchanging process';
   static const String onBoardingDescription3 =
       'We provide a convenient intermediary service between you and the other person, for a nominal fee. This allows you to securely and efficiently exchange with the other person.';
+
+  // Get Started
+  static const String signIn = 'Sign in';
+  static const String createNewAccount = 'Create New Account';
+  static const String continueAsGuest = 'Continue as a guest';
+
+  // Sign in
+  static const String signInTitle = 'SIGN IN NOW';
+  static const String signInMessage = 'Sign in to your account and enjoy our services...';
 
   /// *** ERRORS *** ///
   // Navigation Error

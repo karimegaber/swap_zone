@@ -6,52 +6,54 @@ import 'package:swap_zone/resources/values_manager.dart';
 import 'package:swap_zone/view_models/on_boarding_view_model/on_boarding_view_model.dart';
 import 'package:swap_zone/views/on_boarding/on_boarding_widgets/on_boarding_control.dart';
 
-late OnBoardingViewModel _viewModel;
-
-class OnBoardingView extends StatefulWidget {
+class OnBoardingView extends StatelessWidget {
   const OnBoardingView({super.key});
 
   @override
-  State<OnBoardingView> createState() => _OnBoardingViewState();
-}
-
-class _OnBoardingViewState extends State<OnBoardingView> {
-  @override
   Widget build(BuildContext context) {
-    _viewModel = OnBoardingViewModel();
+    final OnBoardingViewModel viewModel = OnBoardingViewModel();
 
     return CanExit(
       child: Scaffold(
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(AppPadding.p12.r),
-            child: Column(
-              children: [
-                Expanded(
-                  child: PageView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: _viewModel.onBoardingPages.length,
-                    controller: _viewModel.pageController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        _viewModel.onPageChanged(index: index);
-                      });
-                    },
-                    itemBuilder: (context, index) => OnBoardingPage(
-                      page: _viewModel.onBoardingPages[index],
+            child: StatefulBuilder(
+              builder: (BuildContext context,
+                  void Function(void Function()) setState) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: PageView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: viewModel.onBoardingPages.length,
+                        controller: viewModel.pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            viewModel.onPageChanged(index: index);
+                          });
+                        },
+                        itemBuilder: (context, index) => OnBoardingPage(
+                          page: viewModel.onBoardingPages[index],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(height: AppSize.s20.h),
+                    SizedBox(height: AppSize.s20.h),
 
-                // Controls
-                OnBoardingControl(
-                  currentPage: _viewModel.currentPage,
-                  limit: _viewModel.onBoardingPages.length,
-                  nextPage: _viewModel.nextPage,
-                  getStarted: _viewModel.getStarted(context: context),
-                ),
-              ],
+                    // Controls
+                    OnBoardingControl(
+                      currentPage: viewModel.currentPage,
+                      limit: viewModel.onBoardingPages.length,
+                      nextPage: ({required BuildContext context}) {
+                        viewModel.nextPage(context: context);
+                      },
+                      getStarted: ({required BuildContext context}) {
+                        viewModel.getStarted(context: context);
+                      },
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),

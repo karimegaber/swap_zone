@@ -52,7 +52,9 @@ class OnBoardingViewModel {
       currentPage += 1;
       pageController.animateToPage(
         currentPage,
-        duration: const Duration(milliseconds: ConstantsManager.onBoardingAnimationDurationInMilliseconds),
+        duration: const Duration(
+            milliseconds:
+                ConstantsManager.onBoardingAnimationDurationInMilliseconds),
         curve: Curves.linear,
       );
     }
@@ -65,13 +67,9 @@ class OnBoardingViewModel {
 
   // Navigate user to auth options.
   getStarted({required BuildContext context}) {
-    Navigator.of(context)
-        .pushReplacementNamed(Routes.getStartedScreenRoute)
-        .then(
-      (value) {
-        CacheHelper.insertData(
-            key: ConstantsManager.onBoardingSkipped, value: true);
-      },
-    );
+    CacheHelper.insertData(key: ConstantsManager.onBoardingSkipped, value: true)
+        .then((value) {
+      Navigator.of(context).pushReplacementNamed(Routes.getStartedScreenRoute);
+    });
   }
 }
