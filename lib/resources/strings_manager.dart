@@ -37,15 +37,24 @@ class StringsManager {
   static const String emailAddressHint = 'example@company.com';
   static const String password = 'Password';
   static const String passwordHint = '********';
-  static const String forgotPassword = 'Don\'t remember your password ?';
+  static const String signInForgotPasswordMessage =
+      'Don\'t remember your password ?';
   static const String haveNoAccount = 'Don\'t have an account yet ?';
 
   // Register
   static const String registerTitle = 'REGISTER NOW';
-  static const String registerMessage = 'create an account and join our wonderful community now';
+  static const String registerMessage =
+      'create an account and join our wonderful community now';
   static const String fullName = 'Full Name';
   static const String fullNameHint = 'Kareem E. Gaber';
   static const String alreadyHaveAccount = 'already have an account ?';
+
+  // Forgot Password
+  static const String forgotPassword = 'Forgot Password';
+  static const String forgotPasswordTitle = 'Did you forget your password ?';
+  static const String forgotPasswordDescription =
+      'Don\'t worry! please check your email address associated with your account, we will send you an email of very simple instructions to reset your password.';
+  static const String sendInstructionsEmail = 'Send Instructions Email';
 
   /// *** ERRORS *** ///
   // Navigation Error

@@ -7,23 +7,41 @@ class SignInViewModel with AuthValidationMixin {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // Controllers
-  final TextEditingController emailAddressController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  late final TextEditingController emailAddressController;
+  late final TextEditingController passwordController;
 
   bool passwordVisibility = true;
+
+  void init() {
+    emailAddressController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  void dispose() {
+    emailAddressController.dispose();
+    passwordController.dispose();
+  }
 
   void changePasswordVisibilityState() {
     passwordVisibility = !passwordVisibility;
   }
 
   void onPressCreateNewAccount({required BuildContext context}) {
-    Navigator.of(context).pushReplacementNamed(Routes.registerScreenRoute);
+    Navigator.of(context)
+        .pushReplacementNamed(Routes.registerScreenRoute)
+        .whenComplete(() => dispose());
+  }
+
+  void onPressForgotPassword({required BuildContext context}) {
+    Navigator.of(context)
+        .pushNamed(Routes.forgotPasswordScreenRoute)
+        .whenComplete(() => dispose());
   }
 
   // Sign in process
   void onPressSignIn() {
     if (formKey.currentState!.validate()) {
-
+      /// ToDo: use dispose() after completing signing in process.
     }
   }
 }

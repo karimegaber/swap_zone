@@ -31,7 +31,6 @@ class SignInView extends StatelessWidget {
               child: Column(
                 children: [
                   const SignInHeadingWidget(),
-
                   Padding(
                     padding: EdgeInsets.all(AppPadding.p20.r),
                     child: Column(
@@ -116,13 +115,15 @@ class SignInView extends StatelessWidget {
                           alignment: AlignmentDirectional.centerEnd,
                           child: TextButton(
                             child: TextWidget(
-                              text: StringsManager.forgotPassword,
+                              text: StringsManager.signInForgotPasswordMessage,
                               style: getRegularStyle(
                                 color: ColorsManager.black,
                                 fontSize: FontSize.fs14.sp,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              viewModel.onPressForgotPassword(context: context);
+                            },
                           ),
                         ),
 
@@ -186,7 +187,8 @@ class SignInView extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                viewModel.onPressCreateNewAccount(context: context);
+                                viewModel.onPressCreateNewAccount(
+                                    context: context);
                               },
                             ),
                           ],
