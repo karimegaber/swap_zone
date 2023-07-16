@@ -15,4 +15,6 @@ class ConstantsManager {
   static const int splashTimeWaitingInSeconds = 2;
 
   static const int onBoardingAnimationDurationInMilliseconds = 500;
+
+  static const int registerFullNameMaxLength = 36;
 }

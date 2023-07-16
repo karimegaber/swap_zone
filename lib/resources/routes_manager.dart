@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:swap_zone/resources/strings_manager.dart';
 import 'package:swap_zone/view_models/get_started_view_model/get_started_view_model.dart';
 import 'package:swap_zone/view_models/on_boarding_view_model/on_boarding_view_model.dart';
+import 'package:swap_zone/view_models/register_view_model/register_view_model.dart';
 import 'package:swap_zone/view_models/sign_in_view_model/sign_in_view_model.dart';
 import 'package:swap_zone/view_models/splash_view_model/splash_view_model.dart';
 import 'package:swap_zone/views/get_started/get_started_view.dart';
 import 'package:swap_zone/views/on_boarding/on_boarding_view.dart';
+import 'package:swap_zone/views/register/register_view.dart';
 import 'package:swap_zone/views/sign_in/sign_in_view.dart';
 import 'package:swap_zone/views/splash/splash_view.dart';
 
@@ -14,6 +16,7 @@ class Routes {
   static const String onBoardingScreenRoute = '/on_boarding';
   static const String getStartedScreenRoute = '/get_started';
   static const String signInScreenRoute = '/sign_in';
+  static const String registerScreenRoute = '/register';
 }
 
 class RoutesGenerator {
@@ -41,6 +44,12 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (_) => SignInView(
             viewModel: SignInViewModel(),
+          ),
+        );
+      case Routes.registerScreenRoute:
+        return MaterialPageRoute(
+          builder: (_) => RegisterView(
+            viewModel: RegisterViewModel(),
           ),
         );
 

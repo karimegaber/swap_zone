@@ -8,20 +8,26 @@ class SplashViewModel {
   void start({
     required BuildContext context,
   }) {
-    CacheHelper.getData(key: ConstantsManager.onBoardingSkipped).then((value) {
-      if (value ?? false) {
-        // User Skipped on boarding screen
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.of(context)
-              .pushReplacementNamed(Routes.getStartedScreenRoute);
+    Future.delayed(
+      const Duration(seconds: ConstantsManager.splashTimeWaitingInSeconds),
+      () {
+        CacheHelper.getData(key: ConstantsManager.onBoardingSkipped)
+            .then((value) {
+          if (value ?? false) {
+            // User Skipped on boarding screen
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context)
+                  .pushReplacementNamed(Routes.signInScreenRoute);
+            });
+          } else {
+            // User is NEW!
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context)
+                  .pushReplacementNamed(Routes.onBoardingScreenRoute);
+            });
+          }
         });
-      } else {
-        // User is NEW!
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.of(context)
-              .pushReplacementNamed(Routes.onBoardingScreenRoute);
-        });
-      }
-    });
+      },
+    );
   }
 }

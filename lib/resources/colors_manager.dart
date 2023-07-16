@@ -12,4 +12,5 @@ class ColorsManager {
   // Main Colors
   static const Color purple = Color(0xFF6659ED);
   static const Color orange = Color(0xFFF4A83F);
+  static const Color lightOrange = Color(0xFFF4E0B9);
 }

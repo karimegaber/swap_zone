@@ -38,6 +38,14 @@ class StringsManager {
   static const String password = 'Password';
   static const String passwordHint = '********';
   static const String forgotPassword = 'Don\'t remember your password ?';
+  static const String haveNoAccount = 'Don\'t have an account yet ?';
+
+  // Register
+  static const String registerTitle = 'REGISTER NOW';
+  static const String registerMessage = 'create an account and join our wonderful community now';
+  static const String fullName = 'Full Name';
+  static const String fullNameHint = 'Kareem E. Gaber';
+  static const String alreadyHaveAccount = 'already have an account ?';
 
   /// *** ERRORS *** ///
   // Navigation Error

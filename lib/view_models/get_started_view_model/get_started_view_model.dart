@@ -7,7 +7,7 @@ class GetStartedViewModel {
   }
 
   void onPressCreateNewAccount({required BuildContext context}) {
-    Navigator.of(context).pushNamed(Routes.signInScreenRoute);
+    Navigator.of(context).pushNamed(Routes.registerScreenRoute);
   }
 
   void onPressContinueAsGuest({required BuildContext context}) {}
